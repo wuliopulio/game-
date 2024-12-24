@@ -10,7 +10,7 @@ const offset = {
     y:-1250
 }
 
-//collisions
+//collisions hi
 const collisionsMap =[]
 for(let i=0; i < collisions.length; i+=70){
     collisionsMap.push(collisions.slice(i,70 +i))
