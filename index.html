@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>cozy winter games</title> 
+
+
+<style>
+* {
+  font-family: 'omori';
+}
+body {
+    background-color:black;
+      }
+
+@font-face {
+    font-family: 'omori';
+    src: url('./data/OMORI_GAME2.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+</style>
+</head>
+
+<body> 
+
+<div style="display:inline-block; position:absolute; "> 
+  <!--fade to black -->
+  <div id ="overlappingDiv"
+    style="
+    background-color:black; 
+    position:absolute; 
+    top:0; 
+    right:0; 
+    bottom:0; 
+    left:0; 
+    opacity:0; 
+    pointer-events: none;
+    z-index:10;" >
+  </div>  
+  
+  <!--dialogue-->
+  <div id="dialogueText" style = "position:absolute; top:0; left:0; right:0; bottom:5px; overflow: hidden; display:none;">
+    <div style="background-color:rgb(237, 255, 253);  
+    height:130px; 
+    position:absolute; 
+    bottom:50px;
+    left: 85px;
+    right: 85px;
+    border: 3px rgb(128, 178, 207)solid;  
+    border-radius: 10px;opacity:0.9;cursor:pointer;
+   ">
+      <p id="dialogueWords"style="position: absolute; left: 20px; top:-10px; font-size: 30px;">dsjfhs</p>
+    </div>
+    <img src="./img/penguin.png" style="position:absolute; right: 100px; bottom: -30px; height: 330px;z-index:4; pointer-events: none;">
+    <!--name-->
+    <div style="position: absolute; left: 85px; bottom: 188px;
+    height:40px; width:130px; border: 3px rgb(128, 178, 207) solid; border-radius:10px; opacity:0.9;
+    background-color: rgb(237, 255, 253);"> 
+      <p id="speakerName" style="position: absolute; left: 10px; top:-20px; font-size: 25px;">
+        name
+      </p> 
+    </div>
+  </div>
+
+  
+<div id ="intro"
+  style=" width: 0; 
+  height: 200px; 
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0; 
+  overflow: hidden; 
+  border-radius: 2px;
+  border: 3px rgb(35, 25, 25) solid " > 
+
+  <p style="font-size:55px; font-weight: bold; position:absolute; top: 0px; opacity: 0;">Welcome to Snowy Village!</p>
+  <p style="font-size:18px; position: absolute; top: 120px; opacity: 0;"> Use w-a-s-d to move around and click for music! Hope you enjoy! -Chloe</p>
+</div> 
+
+
+  <canvas></canvas>
+
+  <div id="userInterface" style="display:none;">
+    <div style=" 
+    background-color: white; 
+    width:250px; 
+    position:absolute; 
+    top:50px; 
+    left:50px; 
+    border: 3px black solid;
+    padding: 12px;">
+      <h1>?? Child</h1>
+      <div> 
+        <img src="./img/heart.png" style="height:20px">
+        <div style="position: relative; float:right;">
+          <div style=" width:210px;  height:10px; background-color: #ccc; border-radius:10px;border: 2px black solid;"> 
+          </div>
+        <div id="enemyHealthBar" style=" width:210px; position:absolute; top:0; right:0; left:0; height:10px; background-color: #f75252; border-radius:10px; border: 2px black solid"> 
+        </div>
+        </div>
+      </div>
+    </div>
+
+  <div style=" 
+    background-color: white; 
+    width:250px; 
+    position:absolute; 
+    bottom:150px; 
+    right:50px; 
+    border: 3px black solid;
+    padding: 12px;
+  ">
+    <h1>...</h1>
+    <div> <img src="./img/heart.png" style="height:20px">
+      <div style="position: relative; float:right;">
+        <div style=" width:210px;  height:10px; background-color: #ccc; border-radius:10px;border: 2px black solid;"> </div>
+        <div id="playerHealthBar" style=" width:210px; position:absolute; top:0; right:0; left:0; height:10px; background-color: #f75252; border-radius:10px;border: 2px black solid"> 
+        </div>
+        </div>
+      </div>
+    </div>
+
+  <div style="
+  background-color:white;  
+  height:105px; 
+  position:absolute; 
+  bottom:0;
+  left:0;
+  right:0;
+  border-top: 3px black solid; ">
+    <div 
+      id="dialogueBox"
+      style="
+      position:absolute; 
+      background-color: white; 
+      bottom:0; top:0; right:0; left:0;
+      display:none; padding:12px; font-size:40px; cursor:pointer;">
+      <p >dsjkhf</p>  
+    </div>
+    <div style="height:100%">
+      <button style="width:100%; height:100%; font-size: 50px; font-family:'omori';">
+      Throw Snowball</button>
+    </div>
+  </div>
+</div> 
+</div>
+<script 
+src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" 
+integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA==" 
+crossorigin="anonymous" 
+referrerpolicy="no-referrer"></script>
+<script 
+src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" 
+integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" 
+crossorigin="anonymous" 
+referrerpolicy="no-referrer"></script>
+<script src="data/startData.js"></script> 
+<script src="data/attacks.js"></script>
+<script src="audio.js"></script> 
+<script src="data/battleZonesData.js"></script>
+<script src="data/collisions.js"></script> 
+<script src="classes.js"></script> 
+<script src="dialogue.js"></script>
+<script src="index.js"></script> 
+<script src="intro.js"></script>
+<script src="battleScene.js"></script>
+</body>
