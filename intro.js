@@ -1,3 +1,18 @@
+let userName =''
+
+document.querySelector('#submit-name').addEventListener('click', () => {
+  const name = document.querySelector('#name-input').value.trim();
+  if (name) {
+    userName = name
+    fadeOutIntro();
+    document.querySelector('#playerBattleName').textContent = userName; 
+    battle.initiated = false;
+  } else {
+    alert('Please enter a name!');
+  }
+});
+
+
 gsap.fromTo("#intro", 
     { 
       width: 0,         // Start with no width
@@ -10,6 +25,7 @@ gsap.fromTo("#intro",
       ease: "power2.out", // Smooth ease-out effect
       onComplete: function() {
         gsap.fromTo("#intro p", { opacity: 0 }, { opacity: 1, duration: 0.5});
+        gsap.fromTo("#name-container", { opacity: 0 }, { opacity: 1, duration: 0.5});
       }
     }
   );
@@ -20,12 +36,5 @@ function fadeOutIntro() {
    }});
  }
 
-  document.querySelector('#intro').addEventListener('click', (e) => {
-    fadeOutIntro()
-})
-
-setTimeout(() => {
-  if (document.querySelector('#intro').style.display !== 'none') {
-    fadeOutIntro(); // Only fade out if the element isn't already hidden
-  }
-}, 5000); // 5000 milliseconds = 5 seconds  
+  
+ 

@@ -2,15 +2,27 @@ const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 canvas.width = 1024
 canvas.height = 576
-let snowballFight = false
-let startDialogue = false
+let startDialogue = false;
+let wrapPresentQuest = false;
+let presentDialogue = false;
+let presentWrap = false;
+let snowballFight = false;
+let wrapDialogue = false;
+let deliverGiftDialogue = false;
+let wrapAfterDialogue = false;
+let visitedHouses = 0;
+let houseOneStep = false;
+let houseTwoStep = false;
+let houseThreeStep = false;
+let yayPlayed = [false, false, false];
  
 const offset = {
     x: -970,
     y:-1250
 }
 
-//collisions hi
+//collisions  
+
 const collisionsMap =[]
 for(let i=0; i < collisions.length; i+=70){
     collisionsMap.push(collisions.slice(i,70 +i))
@@ -28,7 +40,9 @@ collisionsMap.forEach((row, i) =>{
     })
 })
 
+
 //battlezones
+
 const battleZonesMap =[]
 for(let i=0; i < battleZonesData.length; i+=70){
     battleZonesMap.push(battleZonesData.slice(i,70 +i))
@@ -49,6 +63,7 @@ battleZonesMap.forEach((row, i) =>{
 })
 
 //start position
+
 const startMap =[]
 for(let i=0; i < startData.length; i+=70){
     startMap.push(startData.slice(i,70 +i))
@@ -68,6 +83,103 @@ startMap.forEach((row, i) =>{
     })
 })
 
+//present position 
+
+const presentPenguinMap = [] 
+for(let i=0; i < presentPenguinData.length; i+=70){
+    presentPenguinMap.push(presentPenguinData.slice(i,70 +i))
+}
+
+const presentPenguins = []
+presentPenguinMap.forEach((row, i) =>{
+    row.forEach((symbol,j) => {
+        if (symbol === 5322){
+         presentPenguins.push(
+            new Boundary({
+                position:{
+                    x:j*Boundary.width + offset.x,
+                    y: i*Boundary.height + offset.y
+         }}))}
+    })
+})
+
+//house front
+
+const houseFrontMap =[]
+for(let i=0; i < houseFrontData.length; i+=70){
+    houseFrontMap.push(houseFrontData.slice(i,70 +i))
+}
+
+const houseFronts = []
+
+houseFrontMap.forEach((row, i) =>{
+    row.forEach((symbol,j) => {
+        if (symbol === 5322){
+         houseFronts.push(
+            new Boundary({
+                position:{
+                    x:j*Boundary.width + offset.x,
+                    y: i*Boundary.height + offset.y
+         }}))}
+    })
+})
+
+//house1 position 
+const houseOneMap = [] 
+for(let i=0; i < houseOneData.length; i+=70){
+    houseOneMap.push(houseOneData.slice(i,70 +i))
+}
+
+const houseOnes = []
+houseOneMap.forEach((row, i) =>{
+    row.forEach((symbol,j) => {
+        if (symbol === 5322){
+         houseOnes.push(
+            new Boundary({
+                position:{
+                    x:j*Boundary.width + offset.x,
+                    y: i*Boundary.height + offset.y
+         }}))}
+    })
+})
+
+//house2 position 
+const houseTwoMap = [] 
+for(let i=0; i < houseTwoData.length; i+=70){
+    houseTwoMap.push(houseTwoData.slice(i,70 +i))
+}
+
+const houseTwos = []
+houseTwoMap.forEach((row, i) =>{
+    row.forEach((symbol,j) => {
+        if (symbol === 5322){
+         houseTwos.push(
+            new Boundary({
+                position:{
+                    x:j*Boundary.width + offset.x,
+                    y: i*Boundary.height + offset.y
+         }}))}
+    })
+})
+
+//house2 position 
+const houseThreeMap = [] 
+for(let i=0; i < houseThreeData.length; i+=70){
+    houseThreeMap.push(houseThreeData.slice(i,70 +i))
+}
+
+const houseThrees = []
+houseThreeMap.forEach((row, i) =>{
+    row.forEach((symbol,j) => {
+        if (symbol === 5322){
+         houseThrees.push(
+            new Boundary({
+                position:{
+                    x:j*Boundary.width + offset.x,
+                    y: i*Boundary.height + offset.y
+         }}))}
+    })
+})
 
 
 //Load images 
@@ -141,7 +253,9 @@ const keys ={
 } 
  
 //List of all movable objects in the scene
-const movables = [background, ...boundaries, foreground, ...battleZones, ...startPositions]
+const movables = [background, ...boundaries, foreground, ...battleZones, ...startPositions, ...presentPenguins, ...houseFronts 
+    , ...houseOnes, ...houseTwos, ...houseThrees
+]
 
 //Collision detection between two rectangular objects 
 function rectangularCollision({rectangle1, rectangle2}){
@@ -153,7 +267,7 @@ function rectangularCollision({rectangle1, rectangle2}){
 }
  
 const battle = {
-    initiated: false
+    initiated: true
 }
  
 
@@ -171,6 +285,19 @@ function animate() {
     startPositions.forEach(startposition => {
         startposition.draw()
     })
+    presentPenguins.forEach(presentpenguin => {
+        presentpenguin.draw()
+    })
+    houseOnes.forEach(houseOne => {
+        houseOne.draw()
+    })
+    houseTwos.forEach(houseTwo => {
+        houseTwo.draw()
+    })
+    houseThrees.forEach(houseThree => {
+        houseThree.draw()
+    })
+
     player.draw()
     foreground.draw()
 
@@ -179,6 +306,7 @@ function animate() {
 
     if (battle.initiated) return
 
+    //snowball fight
     if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
         for(let i =0; i<battleZones.length; i++){
             const battleZone = battleZones[i]
@@ -222,6 +350,7 @@ function animate() {
             }
         }
     }
+ 
 
     //start dialogue
     if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
@@ -239,6 +368,138 @@ function animate() {
                 break
             }
         }
+    }
+    //present dialogue
+    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
+        for(let i =0; i<presentPenguins.length; i++){
+            const presentpenguin = presentPenguins[i] 
+            if (presentDialogue === false && startDialogue === true &&
+                rectangularCollision({
+                    rectangle1: player,
+                    rectangle2: presentpenguin  
+                }) 
+            ){  
+                battle.initiated = true
+                console.log('present dialogue')  
+                presentDialogueText();
+                break
+            }
+        }
+    }
+
+    //enter house
+    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
+        for(let i =0; i<houseFronts.length; i++){
+            const houseFront = houseFronts[i] 
+            if (presentWrap === false && presentDialogue === true &&
+                rectangularCollision({
+                    rectangle1: player,
+                    rectangle2: houseFront  
+                }) 
+            ){  
+                battle.initiated = true
+                console.log('enter house')  
+                gsap.to('#overlappingDiv', {
+                    opacity:1,
+                    duration:0.4,
+                    onComplete() {
+                        gsap.to('#overlappingDiv', {
+                            opacity:1,
+                            duration:0.4,
+                            onComplete() { 
+                                audio.Map.stop()
+                                audio.livingRoom.play() 
+                                console.log('animate bake') 
+                                startLivingRoom()
+                                gsap.to('#overlappingDiv', {
+                                    opacity:0,
+                                    duration:0.4
+                                }) 
+                            }
+                        })
+                        
+                    }
+                })
+                break
+            }
+        }
+    }
+
+    //houseone 
+    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
+        for(let i =0; i<houseOnes.length; i++){
+            const houseOne = houseOnes[i] 
+            if (houseOneStep === false && wrapAfterDialogue === true &&
+                rectangularCollision({
+                    rectangle1: player,
+                    rectangle2: houseOne  
+                }) 
+            ){  
+                houseOneStep = true
+                visitedHouses++
+            }
+        }
+    }  
+
+    //housetwo 
+    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
+        for(let i =0; i<houseTwos.length; i++){
+            const houseTwo = houseTwos[i] 
+            if (houseTwoStep === false && wrapAfterDialogue === true &&
+                rectangularCollision({
+                    rectangle1: player,
+                    rectangle2: houseTwo  
+                }) 
+            ){  
+                houseTwoStep = true
+                visitedHouses++
+            }
+        }
+    }  
+
+     //housethree 
+     if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
+        for(let i =0; i<houseThrees.length; i++){
+            const houseThree = houseThrees[i] 
+            if (houseThreeStep === false && wrapAfterDialogue === true &&
+                rectangularCollision({
+                    rectangle1: player,
+                    rectangle2: houseThree  
+                }) 
+            ){  
+                houseThreeStep = true
+                visitedHouses++
+                console.log(visitedHouses)
+            }
+        }
+    }  
+
+
+    if (wrapAfterDialogue === true && deliverGiftDialogue === false){
+        if (visitedHouses === 0)
+            document.querySelector('#currentTaskPlace').innerHTML= 'deliver the three gifts: 0/3 delivered'    
+        if (visitedHouses === 1){
+            document.querySelector('#currentTaskPlace').innerHTML= 'deliver the three gifts: 1/3 delivered' 
+            document.querySelector('#presentThree').style.opacity = 0;
+            if (!yayPlayed[0]) { // Play 'yay' only if it hasn't been played
+                audio.yay.play();
+                yayPlayed[0] = true; // Mark as played
+            }}    
+        if (visitedHouses === 2){
+            document.querySelector('#currentTaskPlace').innerHTML= 'deliver the three gifts: 2/3 delivered'  
+            document.querySelector('#presentTwo').style.opacity = 0;
+            if (!yayPlayed[1]) { // Play 'yay' only if it hasn't been played
+                audio.yay.play();
+                yayPlayed[1] = true; // Mark as played
+            }}     
+        if (visitedHouses === 3) {
+            document.querySelector('#currentTaskPlace').innerHTML= 'deliver the three gifts: 3/3 delivered'  
+            document.querySelector('#presentOne').style.opacity = 0;
+            deliverGiftAfterDialogue() 
+            if (!yayPlayed[2]) { // Play 'yay' only if it hasn't been played
+                audio.yay.play();
+                yayPlayed[2] = true; // Mark as played
+            }}   
     }
 
     //movement logic

@@ -54,6 +54,7 @@ const renderedSprites =[draggle, emby]
 let battleAnimationId
 
 function animateBattle(){
+    document.querySelector('#quest').style.opacity = 'none'
     document.querySelector('#userInterface').style.display = 'block'
     battleAnimationId= window.requestAnimationFrame(animateBattle)
     battleBackground.draw() 
@@ -67,8 +68,7 @@ function animateBattle(){
 
 const queue = []
 
-document.querySelectorAll('button').forEach( button=>{
-    button.addEventListener('click', (e) =>{  
+document.querySelector('#throwSnowball').addEventListener('click', (e) =>{  
         emby.attack({ 
         attack: {
             name: 'Snowball',
@@ -98,6 +98,9 @@ document.querySelectorAll('button').forEach( button=>{
                     battle.initiated = false
                     snowballFight = true
                     audio.Map.play()
+                    gsap.to('#quest', {
+                        opacity: 1
+                    })
                 }
             })})
     }
@@ -115,7 +118,6 @@ document.querySelectorAll('button').forEach( button=>{
     }) 
 
     })
-})
 
 document.querySelector('#dialogueBox').addEventListener('click', (e) => {
     
