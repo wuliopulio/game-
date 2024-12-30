@@ -15,6 +15,8 @@ let houseOneStep = false;
 let houseTwoStep = false;
 let houseThreeStep = false;
 let yayPlayed = [false, false, false];
+let bakeDialogue = false;
+let doBakeCookies = false;
  
 const offset = {
     x: -970,
@@ -162,7 +164,7 @@ houseTwoMap.forEach((row, i) =>{
     })
 })
 
-//house2 position 
+//house3 position 
 const houseThreeMap = [] 
 for(let i=0; i < houseThreeData.length; i+=70){
     houseThreeMap.push(houseThreeData.slice(i,70 +i))
@@ -181,6 +183,43 @@ houseThreeMap.forEach((row, i) =>{
     })
 })
 
+//bakeDialogue 
+const bakeMap = [] 
+for(let i=0; i < bakeData.length; i+=70){
+    bakeMap.push(bakeData.slice(i,70 +i))
+}
+
+const bakes = []
+bakeMap.forEach((row, i) =>{
+    row.forEach((symbol,j) => {
+        if (symbol === 5322){
+         bakes.push(
+            new Boundary({
+                position:{
+                    x:j*Boundary.width + offset.x,
+                    y: i*Boundary.height + offset.y
+         }}))}
+    })
+})
+
+//bakery Front 
+const bakeryFrontMap = [] 
+for(let i=0; i < bakeryFrontData.length; i+=70){
+    bakeryFrontMap.push(bakeryFrontData.slice(i,70 +i))
+}
+
+const bakeryFronts = []
+bakeryFrontMap.forEach((row, i) =>{
+    row.forEach((symbol,j) => {
+        if (symbol === 5322){
+         bakeryFronts.push(
+            new Boundary({
+                position:{
+                    x:j*Boundary.width + offset.x,
+                    y: i*Boundary.height + offset.y
+         }}))}
+    })
+})
 
 //Load images 
 const image = new Image()
@@ -254,7 +293,7 @@ const keys ={
  
 //List of all movable objects in the scene
 const movables = [background, ...boundaries, foreground, ...battleZones, ...startPositions, ...presentPenguins, ...houseFronts 
-    , ...houseOnes, ...houseTwos, ...houseThrees
+    , ...houseOnes, ...houseTwos, ...houseThrees, ...bakes, ...bakeryFronts
 ]
 
 //Collision detection between two rectangular objects 
@@ -296,6 +335,12 @@ function animate() {
     })
     houseThrees.forEach(houseThree => {
         houseThree.draw()
+    })
+    bakes.forEach(bake => {
+        bake.draw()
+    })
+    bakeryFronts.forEach(bakeryFront => {
+        bakeryFront.draw()
     })
 
     player.draw()
@@ -474,7 +519,7 @@ function animate() {
         }
     }  
 
-
+    //delivergift after
     if (wrapAfterDialogue === true && deliverGiftDialogue === false){
         if (visitedHouses === 0)
             document.querySelector('#currentTaskPlace').innerHTML= 'deliver the three gifts: 0/3 delivered'    
@@ -501,6 +546,73 @@ function animate() {
                 yayPlayed[2] = true; // Mark as played
             }}   
     }
+
+    //bakeDialogue
+    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
+        for(let i =0; i<bakes.length; i++){
+            const bake = bakes[i] 
+            if (bakeDialogue === false && deliverGiftDialogue === true &&
+                rectangularCollision({
+                    rectangle1: player,
+                    rectangle2: bake  
+                }) 
+            ){  
+                battle.initiated = true;
+                doBakeDialogue();
+                break
+                
+            }
+        }
+    }  
+
+    
+    //bakeCookies
+    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
+        for(let i =0; i<bakeryFronts.length; i++){
+            const bakeryFront = bakeryFronts[i];
+            const overlappingArea = 
+                (Math.min (
+                player.position.x + player.width, 
+                bakeryFront.position.x + bakeryFront.width)
+                    -Math.max(player.position.x, bakeryFront.position.x) )*
+                (Math.min(player.position.y + player.height, bakeryFront.position.y + bakeryFront.height
+                ) - Math.max(player.position.y, bakeryFront.position.y));
+            if (doBakeCookies === false && bakeDialogue === true && activeDialogue === false && overlappingArea > (player.width*player.height)/2 &&
+                rectangularCollision({
+                    rectangle1: player,
+                    rectangle2: bakeryFront  
+                }) 
+            ){ 
+                console.log('battle zone collision') 
+                window.cancelAnimationFrame(animationId)
+                audio.Map.stop()
+                audio.livingRoom.play()
+                battle.initiated = true
+                gsap.to('#overlappingDiv', {
+                    opacity:1,
+                    duration:0.4,
+                    onComplete() {
+                        gsap.to('#overlappingDiv', {
+                            opacity:1,
+                            duration:0.4,
+                            onComplete() { 
+                                animateBakery()
+                                gsap.to('#overlappingDiv', {
+                                    opacity:0,
+                                    duration:0.4
+                                })
+                            }
+                        })
+                        
+                    }
+                })
+                break
+                
+            }
+        }
+    }  
+
+    
 
     //movement logic
     if (keys.w.pressed && lastKey ==='w') {
@@ -592,7 +704,7 @@ function animate() {
     }
     
 }
-animate()
+// animate()
  
 //Tracks last key pressed for movement direction
 let lastKey =''

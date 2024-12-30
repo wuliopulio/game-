@@ -3,7 +3,7 @@ let fishCount = 0;
 function startLivingRoom() { 
     document.querySelector('#livingRoom').style.opacity = 1;
     setTimeout(livingRoomDialogue,500)
-   
+    document.getElementById('gifts').display.block = 'block';
     gsap.to('#gifts', { opacity: 1, delay: 4, duration: 7, }); 
     document.querySelector('#fishOne').addEventListener('click', ()=> { 
             document.querySelector('#fishOne').style.opacity = '0',
@@ -34,11 +34,12 @@ function checkFishCount() {
                 gsap.to('#overlappingDiv',{
                     opacity:0
                 }) 
-                battle.initiated = false
                 presentWrap = true
                 setTimeout(() => {
                     audio.Map.play();
+                    battle.initiated = false;
                 }, 1500);
+                
                 
         livingRoomAfterDialogue()
         document.querySelector('#presentOne').style.opacity = 1;

@@ -104,6 +104,29 @@ function deliverGiftAfterDialogue() {
 }
 
 
+function doBakeDialogue() { 
+    activeDialogue = true;
+    dialogueLines = [
+        { name: 'penguin 4', text: `Oh my gosh! thanks for coming!`, imageSrc: './img/penguin.png' },
+        { name: 'penguin 4', text: `You came just in time, I just broke my wing so I can't bake cookies!`, imageSrc: './img/penguin.png' },
+        { name: `${userName}`, text: 'Oh no!! Don\'t worry, I can help with cookies.', imageSrc: './img/playerImage.png' }, 
+        { name: 'penguin 4', text: `Thank you so much ;_; the bakery is right there! I have the recipe set up and everything.`, imageSrc: './img/penguin.png' },
+        { name: `${userName}`, text: 'No problem! It\'ll be done in no time.', imageSrc: './img/playerImage.png' }
+    ];
+    currentLineIndex = 0;  
+ 
+    showNextLine(); 
+
+    document.querySelector('#dialogueText').addEventListener('click', showNextLine); 
+    bakeDialogue = true;
+
+    document.querySelector('#currentTaskPlace').innerHTML= 'Head over to bakery'    
+    document.querySelector('#tasksCompleted').innerHTML= '1 / 3'   
+    document.querySelector('#currentTaskName').innerHTML= 'Bake Cookies'      
+ 
+}
+
+
 function showNextLine() {
     if (currentLineIndex === 0)
         document.querySelector('#quest').style.display = 'block';

@@ -54,7 +54,7 @@ const renderedSprites =[draggle, emby]
 let battleAnimationId
 
 function animateBattle(){
-    document.querySelector('#quest').style.opacity = 'none'
+    document.querySelector('#quest').style.opacity = 0;
     document.querySelector('#userInterface').style.display = 'block'
     battleAnimationId= window.requestAnimationFrame(animateBattle)
     battleBackground.draw() 
