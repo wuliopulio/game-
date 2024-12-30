@@ -3,6 +3,7 @@ let pourSugarBool = false;
 let pourButterBool = false;
 let crackEggBool = false;
 let pourChocolateChipsBool = false;
+let mixBowlBool = false;
 
 // const bakeryBackgroundImage = new Image()
 // bakeryBackgroundImage.src = './img/kitchen.png'
@@ -21,7 +22,7 @@ function animateBakery(){
     bakeryAnimationId= window.requestAnimationFrame(animateBakery)
     // bakeryBackground.draw() 
     document.getElementById('bakeryBackgroundImage').style.display = "block"; 
-
+    document.getElementById('bakeryForeground').style.display = "block"; 
     if (!pourFlourBool){
         document.getElementById('flourImage').style.cursor = 'pointer';
         pourFlour();}
@@ -40,13 +41,75 @@ function animateBakery(){
     if (!pourChocolateChipsBool && crackEggBool){ 
         document.getElementById('chocolateChipsImage').style.cursor = 'pointer';
         document.getElementById('chocolateChipsImage').addEventListener('click',pourChocolateChips); }
+
+    if (!mixBowlBool && pourChocolateChipsBool){ 
+        document.getElementById('bakeryForeground').style.pointerEvents = 'auto';
+        document.getElementById('bakeryForeground').style.cursor = 'pointer';
+        document.getElementById('bakeryForeground').addEventListener('click',mixBowl); }
     
 }
 
+function mixBowl(){
+    document.getElementById('bakeryBackgroundImageAfterMixing').style.opacity = '1'; 
+    document.getElementById('bakeryForeground').style.opacity = '1'; 
+    if (!mixBowlBool && pourChocolateChipsBool){
+        gsap.to('#whisk',{
+            duration: 1,
+            opacity:1
+        })
+        gsap.to('#whisk',{
+            bottom:90,
+            delay:1,
+            onComplete(){
+                gsap.to('#whisk',{
+                    opacity: 1,
+                    rotation: '-20deg',
+                    onComplete(){
+                        gsap.to('#whisk',{
+                            opacity: 1,
+                            rotation: '40deg',
+                            onComplete(){
+                                gsap.to('#bakeryBackgroundImageAfterChocolateChips', { opacity: 0,    });
+                                gsap.to('#whisk',{
+                                    opacity: 1,
+                                    rotation: '-40deg',
+                                    onComplete(){
+                                        gsap.to('#whisk',{
+                                            opacity: 1,
+                                            rotation: '40deg',
+                                            onComplete(){
+                                                gsap.to('#whisk',{
+                                                    opacity: 1,
+                                                    rotation: '0deg',
+                                                    onComplete(){
+                                                        gsap.to('#whisk',{
+                                                            bottom: 120,onComplete(){ 
+                                                                document.querySelector('#mix').innerHTML = "&#9745; Mix mix mix ";
+                                                                document.querySelector('#bakeryForeground').style.cursor = "auto ";
+                                                                gsap.to('#whisk',{
+                                                                    opacity: 0
+                                                            })
+                                                        }
+                                                    })
+                                                }
+                                            })
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }})
+        
+    } 
+}
 
 function pourChocolateChips() {
+    document.getElementById('bakeryBackgroundImageAfterChocolateChips').style.opacity = '1'; 
          
-    if (!pourChocolateChipsBool ) {
+    if (!pourChocolateChipsBool && crackEggBool) {
     pourChocolateChipsBool = true;   
     gsap.to('#chocolateChipsImage',{
         bottom: '180px',
@@ -60,6 +123,7 @@ function pourChocolateChips() {
                 opacity: 1,
                 duration: 1,
                 onComplete(){
+                    gsap.to('#bakeryBackgroundImageAfterEgg', { opacity: 0,    });
                     document.getElementById('chocolateChipsImage').src = './img/emptyChocolateChipBowl.png';
                     gsap.to('#chocolateChipsPouredImage',{
                         opacity: 0,
@@ -87,6 +151,7 @@ function crackEgg() {
         
     console.log("clicked")
 if (!crackEggBool  && pourButterBool) {
+    document.getElementById('bakeryBackgroundImageAfterEgg').style.opacity = '1'; 
 crackEggBool = true;   
 gsap.to('#eggImage',{
     bottom: '270px',
@@ -105,12 +170,12 @@ gsap.to('#eggImage',{
                 document.getElementById('eggCrackedImage').style.opacity = '1';
                 gsap.to('#eggCrackedImage', {
                     duration:0.3,
-                    bottom:'270px',
-                    left:'410px',
-                    ease: "power1.in",
+                    bottom:'240px',
+                    left:'425px',
+                    ease: "power1.inOut",
                     onComplete(){
                         gsap.to('#eggCrackedImage', {
-                            delay: 0.8,
+                            delay: 0.2,
                             duration: 1,
                             bottom: '200px',
                             left:'520px',
@@ -126,6 +191,7 @@ gsap.to('#eggImage',{
                                     opacity: 1, 
                                     onComplete(){ 
                                         gsap.to('#eggOpenedImage', { delay:1,opacity: 0,    });
+                                        gsap.to('#bakeryBackgroundImageAfterButter',{delay:1,opacity: 0});
                                         document.querySelector('#egg').innerHTML = "&#9745; Crack an egg in";
                                         document.querySelector('#eggImage').style.cursor = "auto ";
                                     }
@@ -143,6 +209,7 @@ gsap.to('#eggImage',{
 function pourButter() {
          
 if (!pourButterBool && pourSugarBool) {
+    document.getElementById('bakeryBackgroundImageAfterButter').style.opacity = '1'; 
 pourButterBool = true;   
 gsap.to('#butterImage',{
     bottom: '200px',
@@ -159,6 +226,7 @@ gsap.to('#butterImage',{
                 gsap.to('#butterPouredImage',{
                     opacity: 0,
                     onComplete(){
+                        gsap.to('#bakeryBackgroundImageAfterSugar',{opacity: 0});
                     document.getElementById('butterPouredImage').style.zIndex = '3';
                         gsap.to('#butterImage',{
                             bottom: '10px',
@@ -180,6 +248,7 @@ gsap.to('#butterImage',{
 
 function pourSugar() { 
     if (!pourSugarBool && pourFlourBool) {
+    document.getElementById('bakeryBackgroundImageAfterSugar').style.opacity = '1'; 
         pourSugarBool = true;   
         gsap.to('#sugarImage',{
             bottom: '207px',
@@ -192,6 +261,7 @@ function pourSugar() {
                     opacity: 1,
                     duration: 1,
                     onComplete(){
+                        gsap.to('#bakeryBackgroundImageAfterFlour',{opacity: 0});
                         gsap.to('#sugarPouredImage',{
                             opacity: 0,
                             onComplete(){
@@ -215,7 +285,8 @@ function pourSugar() {
 function pourFlour() {
     
         document.querySelector('#flourImage').addEventListener('click',() => {
-            if (!pourFlourBool){
+            if (!pourFlourBool){ 
+                document.getElementById('bakeryBackgroundImageAfterFlour').style.opacity = '1'; 
                 pourFlourBool = true;
             gsap.to('#flourImage',{
                 bottom: '256px',
@@ -228,6 +299,7 @@ function pourFlour() {
                         opacity: 1,
                         duration: 1,
                         onComplete(){
+                            gsap.to('#bakeryBackgroundImage',{opacity:0})
                             gsap.to('#flourPouredImage',{
                                 opacity: 0,
                                 onComplete(){
