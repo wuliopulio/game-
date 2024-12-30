@@ -18,9 +18,12 @@ let mixBowlBool = false;
 let bakeryAnimationId
 
 function animateBakery(){
+    document.getElementById('recipe').style.opacity = 1;
     document.getElementById('quest').style.opacity = 0; 
     bakeryAnimationId= window.requestAnimationFrame(animateBakery)
     // bakeryBackground.draw() 
+    document.getElementById('ingredients').style.opacity = 1;
+    document.getElementById('ingredients').style.pointerEvents = 'auto';
     document.getElementById('bakeryBackgroundImage').style.display = "block"; 
     document.getElementById('bakeryForeground').style.display = "block"; 
     if (!pourFlourBool){
@@ -183,7 +186,7 @@ gsap.to('#eggImage',{
                             // ease: "power1.in",
                             onComplete(){
                                 gsap.to('#eggCrackedImage', {
-                                    delay:0.5,
+                                    delay:0.4,
                                     opacity: 0
                                 });
                                 gsap.to('#eggOpenedImage', {
@@ -324,5 +327,5 @@ function pourFlour() {
 
 
 
-animateBakery()
+// animateBakery()
  

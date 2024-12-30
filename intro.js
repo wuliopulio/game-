@@ -20,7 +20,7 @@ gsap.fromTo("#intro",
     }, 
     { 
       width: "700px",   // End at the full width
-      opacity: 0,       // Fade in
+      opacity: 1,       // Fade in
       duration: 1.5,     // Total animation duration
       ease: "power2.out", // Smooth ease-out effect
       onComplete: function() {

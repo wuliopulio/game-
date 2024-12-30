@@ -139,11 +139,12 @@ transform: translate(-50%, -50%);">
   </div>  
 
   <!-- deliver presents -->
-      <img id="presentOne" style="opacity: 0; pointer-events: none; position: absolute; top: 10px; right: 10px; height: 40px" src="./img/presentOne.png">
-      <img id="presentTwo" style="opacity: 0; pointer-events: none; position: absolute; top: 10px; right: 60px; height: 40px" src="./img/presentTwo.png">
-      <img id="presentThree" style="opacity: 0; pointer-events: none; position: absolute; top: 10px; right: 105px; height: 40px" src="./img/presentThree.png">
+      <img id="presentThree" style="opacity: 0; pointer-events: none; position: absolute; top: 190px; left: 40px; height: 40px" src="./img/presentOne.png">
+      <img id="presentTwo" style="opacity: 0; pointer-events: none; position: absolute; top: 190px; left: 90px; height: 40px" src="./img/presentTwo.png">
+      <img id="presentOne" style="opacity: 0; pointer-events: none; position: absolute; top: 190px; left: 135px; height: 40px" src="./img/presentThree.png">
 
       <!-- baking stuff --> 
+       <div id="backgroundImagesKitchen"> 
        <img id="bakeryBackgroundImageAfterMixing" style="opacity:0;pointer-events: none; position: absolute; top:0; right:0; left:0; bottom:0;" src="./img/kitchenAfterMixing.png">
        <img id="bakeryBackgroundImageAfterChocolateChips" style="opacity:0;pointer-events: none; position: absolute; top:0; right:0; left:0; bottom:0;" src="./img/kitchenAfterChocolateChips.png">
        <img id="bakeryBackgroundImageAfterEgg" style="opacity:0;pointer-events: none; position: absolute; top:0; right:0; left:0; bottom:0;" src="./img/kitchenAfterEgg.png">
@@ -151,7 +152,8 @@ transform: translate(-50%, -50%);">
        <img id="bakeryBackgroundImageAfterSugar" style="opacity:0;pointer-events: none; position: absolute; top:0; right:0; left:0; bottom:0;" src="./img/kitchenAfterSugar.png">
        <img id="bakeryBackgroundImageAfterFlour" style="opacity:0;pointer-events: none; position: absolute; top:0; right:0; left:0; bottom:0;" src="./img/kitchenAfterFlour.png">
        <img id="bakeryBackgroundImage" style="display:none;pointer-events: none; position: absolute; top:0; right:0; left:0; bottom:0;" src="./img/kitchen.png">
-       <div id="recipe" style="pointer-events: none; position: absolute; top: 40px; left: 70px; right: 720px; bottom: 120px; ">
+      </div>
+       <div id="recipe" style="opacity:0; pointer-events: none; position: absolute; top: 40px; left: 70px; right: 720px; bottom: 120px; ">
         <h1 style="display: flex; justify-content: center;">Chocolate Chip <br> Cookie Recipe</h1>
         <div style="padding-left: 30px; font-size: 17px; line-height:1">
           <h3 id="flour"> &#9744; Pour some flour in </h3>
@@ -162,21 +164,24 @@ transform: translate(-50%, -50%);">
           <h3 id="mix"> &#9744; Mix mix mix</h3> 
           <h3 id="bakeStep"> &#9744; Bake Cookies! </h3> 
         </div>
-       </div>
-       <div id="ingredients">
+       </div >
+       <div id="editedIngredients" style=" pointer-events: none;">
        <img id="flourPouredImage" style="z-index: 2;opacity: 0; position: absolute; bottom: 125px; right: 225px;" src="./img/flourPoured.png">
+       <img id="sugarPouredImage" style="opacity: 0; position: absolute; bottom: 130px; right: 205px; z-index: 2" src="./img/sugarPoured.png">
+       <img id="butterPouredImage" style="opacity: 0; position: absolute; bottom: 155px; right: 230px; z-index: 4" src="./img/butterPoured.png">
+       <img id="chocolateChipsPouredImage" style="opacity: 0; position: absolute; bottom: 70px; left: 400px; z-index: 5" src="./img/chocolateChipsPoured.png">
+       <img id="eggCrackedImage" style="opacity: 0; position: absolute; bottom: 150px; left: 440px; z-index: 6" src="./img/eggCracked.png">
+       <img id="eggOpenedImage" style="opacity: 0; position: absolute; bottom: 150px; left: 510px; z-index: 6" src="./img/eggOpened.png">
+       <img id="whisk" style="opacity: 0; position: absolute; bottom: 120px; right: 390px; z-index: 7; height:180px" src="./img/whisk.png">
+       <img id="bakeryForeground" style="opacity:0; display:none;pointer-events: none; position: absolute; top:0; right:0; left:0; bottom:0;z-index: 10;" src="./img/kitchenForeground.png">
+      </div>
+       <div id="ingredients" style="opacity:0; pointer-events: none;">
       <img id="flourImage" style="z-index: 2;opacity: 1;  position: absolute; bottom: 55px; right: 100px;" src="./img/flour.png">      
-      <img id="sugarPouredImage" style="opacity: 0; position: absolute; bottom: 130px; right: 205px; z-index: 2" src="./img/sugarPoured.png">
       <img id="sugarImage" style="opacity: 1; position: absolute; bottom: 30px; right: 45px; z-index: 3" src="./img/sugar.png">
-      <img id="butterPouredImage" style="opacity: 0; position: absolute; bottom: 155px; right: 230px; z-index: 4" src="./img/butterPoured.png">
       <img id="butterImage" style="opacity: 1; position: absolute; bottom: 10px; right: 90px; z-index: 4" src="./img/butter.png">
-      <img id="chocolateChipsPouredImage" style="opacity: 0; position: absolute; bottom: 70px; left: 400px; z-index: 5" src="./img/chocolateChipsPoured.png">
       <img id="chocolateChipsImage" style="opacity: 1; position: absolute; bottom: 40px; left: 310px; z-index: 5" src="./img/chocolateChips.png">
-      <img id="eggImage" style="opacity: 1; position: absolute; bottom: 20px; left: 380px; z-index: 6" src="./img/egg.png">    
-      <img id="eggCrackedImage" style="opacity: 0; position: absolute; bottom: 150px; left: 440px; z-index: 6" src="./img/eggCracked.png">
-      <img id="eggOpenedImage" style="opacity: 0; position: absolute; bottom: 150px; left: 510px; z-index: 6" src="./img/eggOpened.png">
-      <img id="whisk" style="opacity: 0; position: absolute; bottom: 120px; right: 390px; z-index: 6; height:180px" src="./img/whisk.png">
-      <img id="bakeryForeground" style="opacity:0; display:none;pointer-events: none; position: absolute; top:0; right:0; left:0; bottom:0;z-index: 10;" src="./img/kitchenForeground.png">
+      <img id="eggImage" style="opacity: 1; position: absolute; bottom: 20px; left: 380px; z-index: 6" src="./img/egg.png">  
+    </div>  
        
   <canvas></canvas>
 
@@ -243,8 +248,8 @@ transform: translate(-50%, -50%);">
       Throw Snowball</button>
     </div>
   </div>
-</div> 
-</div>
+
+</div>  
 
 <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 <script 

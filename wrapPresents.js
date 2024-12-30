@@ -3,7 +3,7 @@ let fishCount = 0;
 function startLivingRoom() { 
     document.querySelector('#livingRoom').style.opacity = 1;
     setTimeout(livingRoomDialogue,500)
-    document.getElementById('gifts').display.block = 'block';
+    document.getElementById('gifts').style.display = 'block';
     gsap.to('#gifts', { opacity: 1, delay: 4, duration: 7, }); 
     document.querySelector('#fishOne').addEventListener('click', ()=> { 
             document.querySelector('#fishOne').style.opacity = '0',

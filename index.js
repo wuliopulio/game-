@@ -570,14 +570,8 @@ function animate() {
     if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
         for(let i =0; i<bakeryFronts.length; i++){
             const bakeryFront = bakeryFronts[i];
-            const overlappingArea = 
-                (Math.min (
-                player.position.x + player.width, 
-                bakeryFront.position.x + bakeryFront.width)
-                    -Math.max(player.position.x, bakeryFront.position.x) )*
-                (Math.min(player.position.y + player.height, bakeryFront.position.y + bakeryFront.height
-                ) - Math.max(player.position.y, bakeryFront.position.y));
-            if (doBakeCookies === false && bakeDialogue === true && activeDialogue === false && overlappingArea > (player.width*player.height)/2 &&
+             
+            if (doBakeCookies === false && bakeDialogue === true && activeDialogue === false &&
                 rectangularCollision({
                     rectangle1: player,
                     rectangle2: bakeryFront  
@@ -704,7 +698,7 @@ function animate() {
     }
     
 }
-// animate()
+animate()
  
 //Tracks last key pressed for movement direction
 let lastKey =''
