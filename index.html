@@ -144,7 +144,7 @@ transform: translate(-50%, -50%);">
       <img id="presentOne" style="opacity: 0; pointer-events: none; position: absolute; top: 190px; left: 135px; height: 40px" src="./img/presentThree.png">
 
       <!-- baking stuff --> 
-       <div id="backgroundImagesKitchen"> 
+       <div id="backgroundImagesKitchen">  
        <img id="bakeryBackgroundImageAfterMixing" style="opacity:0;pointer-events: none; position: absolute; top:0; right:0; left:0; bottom:0;" src="./img/kitchenAfterMixing.png">
        <img id="bakeryBackgroundImageAfterChocolateChips" style="opacity:0;pointer-events: none; position: absolute; top:0; right:0; left:0; bottom:0;" src="./img/kitchenAfterChocolateChips.png">
        <img id="bakeryBackgroundImageAfterEgg" style="opacity:0;pointer-events: none; position: absolute; top:0; right:0; left:0; bottom:0;" src="./img/kitchenAfterEgg.png">
@@ -182,6 +182,16 @@ transform: translate(-50%, -50%);">
       <img id="chocolateChipsImage" style="opacity: 1; position: absolute; bottom: 40px; left: 310px; z-index: 5" src="./img/chocolateChips.png">
       <img id="eggImage" style="opacity: 1; position: absolute; bottom: 20px; left: 380px; z-index: 6" src="./img/egg.png">  
     </div>  
+    <div style="position: absolute; width: 100%; height: 100%; pointer-events: none; z-index: 0;">
+      <button id="bakeButton" 
+              style="z-index:11;opacity:0;display:none;pointer-events: auto; position: absolute; top: 50%; left: 60%; transform: translate(-50%, -50%);   width: 400px; height: 70px; font-size: 50px; font-family: 'omori';
+                border: 3px black solid; font-weight:bold; background-color: #f4d8c3;">
+        Bake Cookies
+      </button>
+    </div>
+    <div id="clockAnimation" style="display: none; opacity:0;width: 200px; height: 200px;
+    pointer-events: none; position: absolute; top: 50%; left: 60%; transform: translate(-50%, -50%);"></div>
+    
        
   <canvas></canvas>
 
@@ -251,6 +261,7 @@ transform: translate(-50%, -50%);">
 
 </div>  
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
 <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 <script 
 src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" 

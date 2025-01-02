@@ -4,6 +4,15 @@ let pourButterBool = false;
 let crackEggBool = false;
 let pourChocolateChipsBool = false;
 let mixBowlBool = false;
+let bakeCookiesBool = false;
+let showIngredients = false;
+var animData = { 
+        container: document.getElementById('clockAnimation'),  
+        renderer: 'svg',  
+        loop: false, 
+        autoplay: true, 
+        path: './data/clockAnimation.json',
+}
 
 // const bakeryBackgroundImage = new Image()
 // bakeryBackgroundImage.src = './img/kitchen.png'
@@ -22,10 +31,11 @@ function animateBakery(){
     document.getElementById('quest').style.opacity = 0; 
     bakeryAnimationId= window.requestAnimationFrame(animateBakery)
     // bakeryBackground.draw() 
-    document.getElementById('ingredients').style.opacity = 1;
-    document.getElementById('ingredients').style.pointerEvents = 'auto';
+    if (!showIngredients){
+        document.getElementById('ingredients').style.opacity = 1;
+        document.getElementById('ingredients').style.pointerEvents = 'auto'; 
+        document.getElementById('bakeryForeground').style.display = "block"; }
     document.getElementById('bakeryBackgroundImage').style.display = "block"; 
-    document.getElementById('bakeryForeground').style.display = "block"; 
     if (!pourFlourBool){
         document.getElementById('flourImage').style.cursor = 'pointer';
         pourFlour();}
@@ -49,7 +59,50 @@ function animateBakery(){
         document.getElementById('bakeryForeground').style.pointerEvents = 'auto';
         document.getElementById('bakeryForeground').style.cursor = 'pointer';
         document.getElementById('bakeryForeground').addEventListener('click',mixBowl); }
+
+    if (!bakeCookiesBool && mixBowlBool){ 
+        document.getElementById('bakeButton').style.pointerEvents = 'auto';
+        document.getElementById('bakeButton').style.display = 'block';
+        document.getElementById('bakeryForeground').style.display = 'none';
+        gsap.to('#bakeButton',{
+            opacity:'1',
+        }); 
+        showIngredients = true;
+        gsap.to('#ingredients', {
+            opacity:'0'
+        })  
+        gsap.to('#bakeryForeground', {
+            opacity:'0'
+        })  
+        document.getElementById('bakeButton').addEventListener('click', () => {
+            console.log('bakeButton clicked');
+            bakeCookies(); 
+        });    
     
+}}
+
+function bakeCookies(){ 
+    if (!bakeCookiesBool && mixBowlBool){
+    bakeCookiesBool= true; 
+        console.log('bool true')
+        gsap.to('#bakeButton', {
+            opacity:'0',
+            onComplete(){ 
+            document.getElementById('bakeButton').style.display = 'none';
+            document.getElementById('clockAnimation').style.display = 'block';
+            anim = lottie.loadAnimation(animData);
+            
+            gsap.to('#clockAnimation',{
+                opacity:1
+            })
+            anim.addEventListener('complete', function() {
+                gsap.to('#clockAnimation', {
+                    opacity:0
+                })
+              });
+            }        
+    });
+    }    
 }
 
 function mixBowl(){
@@ -89,8 +142,14 @@ function mixBowl(){
                                                             bottom: 120,onComplete(){ 
                                                                 document.querySelector('#mix').innerHTML = "&#9745; Mix mix mix ";
                                                                 document.querySelector('#bakeryForeground').style.cursor = "auto ";
+                                                                document.querySelector('#bakeryForeground').style.display = "none ";
+                                                                document.querySelector('#bakeryForeground').style.opacity = "0";
                                                                 gsap.to('#whisk',{
-                                                                    opacity: 0
+                                                                    opacity: 0,
+                                                                    onComplete(){
+                                                                        
+                                                                        mixBowlBool = true; 
+                                                                    }
                                                             })
                                                         }
                                                     })
@@ -150,9 +209,7 @@ function pourChocolateChips() {
     
     
 
-function crackEgg() {
-        
-    console.log("clicked")
+function crackEgg() { 
 if (!crackEggBool  && pourButterBool) {
     document.getElementById('bakeryBackgroundImageAfterEgg').style.opacity = '1'; 
 crackEggBool = true;   
@@ -327,5 +384,5 @@ function pourFlour() {
 
 
 
-// animateBakery()
+animateBakery()
  
