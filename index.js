@@ -16,7 +16,8 @@ let houseTwoStep = false;
 let houseThreeStep = false;
 let yayPlayed = [false, false, false];
 let bakeDialogue = false;
-let doBakeCookies = false;
+let doBakeCookies = false; 
+let afterBakeDialogueBool = false;
  
 const offset = {
     x: -970,
@@ -564,8 +565,7 @@ function animate() {
             }
         }
     }  
-
-    
+ 
     //bakeCookies
     if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
         for(let i =0; i<bakeryFronts.length; i++){

@@ -97,8 +97,9 @@ function bakeCookies(){
                         gsap.to('#bakeryBackgroundImageBlank',{opacity:0,
                             onComplete(){
                                 document.querySelector('#bakeStep').innerHTML = "&#9745; Bake Cookies!"; 
+                                audio.livingRoom.stop() 
                                 audio.victory.play() 
-                                setTimeout(doneBaking, 2000)
+                                setTimeout(doneBaking, 2500)
                             }
                         })
                     }
@@ -124,10 +125,8 @@ function doneBaking(){
             }) 
             battle.initiated = false
             doBakeCookies = true
-            audio.Map.play()
-            gsap.to('#quest', {
-                opacity: 1
-            })
+            audio.Map.play()  
+            afterBakeDialogue()
         }
     })
 }

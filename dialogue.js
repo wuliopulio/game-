@@ -127,6 +127,27 @@ function doBakeDialogue() {
 }
 
 
+function afterBakeDialogue() { 
+    activeDialogue = true;
+    dialogueLines = [
+        { name: 'penguin 4', text: `Thanks so much for covering for me. What do you need to do next?`, imageSrc: './img/penguin.png' }, 
+        { name: `${userName}`, text: 'I think the last thing I\'ll help with will be putting up the star', imageSrc: './img/playerImage.png' }, 
+        { name: 'penguin 4', text: `Oh the star! Penguin 5 to the right should have it. Thanks so much again and good luck!`, imageSrc: './img/penguin.png' },
+        { name: `${userName}`, text: 'No problem! ', imageSrc: './img/playerImage.png' }
+    ];
+    currentLineIndex = 0;  
+ 
+    showNextLine(); 
+
+    document.querySelector('#dialogueText').addEventListener('click', showNextLine); 
+    afterBakeDialogueBool = true;
+
+    document.querySelector('#currentTaskPlace').innerHTML= 'Head over to penguin 5'    
+    document.querySelector('#tasksCompleted').innerHTML= '2 / 3'   
+    document.querySelector('#currentTaskName').innerHTML= 'Put up star'      
+ 
+}
+
 function showNextLine() {
     if (currentLineIndex === 0)
         document.querySelector('#quest').style.display = 'block';
