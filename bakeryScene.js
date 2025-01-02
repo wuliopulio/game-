@@ -17,8 +17,10 @@ var animData = {
 let bakeryAnimationId
 
 function animateBakery(){
-    document.getElementById('recipe').style.opacity = 1;
+    if (!doBakeCookies){ 
     document.getElementById('quest').style.opacity = 0; 
+    }
+    document.getElementById('recipe').style.opacity = 1;
     bakeryAnimationId= window.requestAnimationFrame(animateBakery)
     // bakeryBackground.draw() 
     if (!showIngredients){
@@ -126,6 +128,9 @@ function doneBaking(){
             battle.initiated = false
             doBakeCookies = true
             audio.Map.play()  
+            gsap.to('#quest', {
+                opacity: 0.9
+            })
             afterBakeDialogue()
         }
     })

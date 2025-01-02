@@ -443,7 +443,7 @@ function animate() {
                     rectangle2: houseFront  
                 }) 
             ){  
-                battle.initiated = true
+                battle.initiated = true;
                 console.log('enter house')  
                 gsap.to('#overlappingDiv', {
                     opacity:1,

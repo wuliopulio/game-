@@ -99,7 +99,7 @@ document.querySelector('#throwSnowball').addEventListener('click', (e) =>{
                     snowballFight = true
                     audio.Map.play()
                     gsap.to('#quest', {
-                        opacity: 1
+                        opacity: 0.9
                     })
                 }
             })})

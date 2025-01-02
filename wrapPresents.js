@@ -1,6 +1,7 @@
 let fishCount = 0;
 
-function startLivingRoom() { 
+function startLivingRoom() {  
+    battle.initiated = true;
     document.querySelector('#livingRoom').style.opacity = 1;
     setTimeout(livingRoomDialogue,500)
     document.getElementById('gifts').style.display = 'block';
