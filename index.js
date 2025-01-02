@@ -698,7 +698,7 @@ function animate() {
     }
     
 }
-// animate()
+animate()
  
 //Tracks last key pressed for movement direction
 let lastKey =''

@@ -14,16 +14,6 @@ var animData = {
         path: './data/clockAnimation.json',
 }
 
-// const bakeryBackgroundImage = new Image()
-// bakeryBackgroundImage.src = './img/kitchen.png'
-// const bakeryBackground = new Sprite({position: {
-//     x:0, 
-//     y:0
-// },
-//     image: bakeryBackgroundImage, 
-//     animate:true
-// })
-
 let bakeryAnimationId
 
 function animateBakery(){
@@ -74,6 +64,10 @@ function animateBakery(){
         gsap.to('#bakeryForeground', {
             opacity:'0'
         })  
+        document.getElementById('bakeryBackgroundImageBlank').style.opacity = 1;
+        gsap.to('#bakeryBackgroundImageAfterMixing', {
+            opacity:'0'
+        })  
         document.getElementById('bakeButton').addEventListener('click', () => {
             console.log('bakeButton clicked');
             bakeCookies(); 
@@ -90,6 +84,7 @@ function bakeCookies(){
             onComplete(){ 
             document.getElementById('bakeButton').style.display = 'none';
             document.getElementById('clockAnimation').style.display = 'block';
+            document.getElementById('bakeryBackgroundImageWithCookies').style.opacity = '1';
             anim = lottie.loadAnimation(animData);
             
             gsap.to('#clockAnimation',{
@@ -97,12 +92,44 @@ function bakeCookies(){
             })
             anim.addEventListener('complete', function() {
                 gsap.to('#clockAnimation', {
-                    opacity:0
+                    opacity:0,
+                    onComplete(){
+                        gsap.to('#bakeryBackgroundImageBlank',{opacity:0,
+                            onComplete(){
+                                document.querySelector('#bakeStep').innerHTML = "&#9745; Bake Cookies!"; 
+                                audio.victory.play() 
+                                setTimeout(doneBaking, 2000)
+                            }
+                        })
+                    }
                 })
               });
             }        
     });
     }    
+}
+
+function doneBaking(){ 
+    gsap.to('#overlappingDiv', {
+        opacity:1,
+        onComplete: () => {
+            cancelAnimationFrame(animateBakery)
+            animate()
+            document.getElementById('recipe').style.display= 'none'
+            gsap.to('#overlappingDiv',{
+                opacity:0
+            }) 
+            gsap.to('#bakeryBackgroundImageWithCookies',{
+                opacity:0
+            }) 
+            battle.initiated = false
+            doBakeCookies = true
+            audio.Map.play()
+            gsap.to('#quest', {
+                opacity: 1
+            })
+        }
+    })
 }
 
 function mixBowl(){
@@ -384,5 +411,5 @@ function pourFlour() {
 
 
 
-animateBakery()
+// animateBakery()
  
