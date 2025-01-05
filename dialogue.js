@@ -172,6 +172,28 @@ function beforeSnowballDialogue() {
  
 }
 
+function afterSnowballDialogue() { 
+    activeDialogue = true;
+    dialogueLines = [
+        { name: 'penguin 5', text: `Ohh!! ${userName}, thank you so much!`, imageSrc: './img/penguin.png' }, 
+        { name: `${userName}`, text: 'Oh my gosh of course! I\'m so happy I could help', imageSrc: './img/playerImage.png' }, 
+        { name: 'penguin 5', text: `Yes.. you\'ve been a huge help. Would you like to watch us light up the christmas tree?`, imageSrc: './img/penguin.png' },
+        { name: `${userName}`, text: 'I\'d love to!', imageSrc: './img/playerImage.png' }, 
+        { name: 'penguin 5', text: `Let's head over to the christmas tree then!`, imageSrc: './img/penguin.png' } 
+    ];
+    currentLineIndex = 0;  
+ 
+    showNextLine(); 
+
+    document.querySelector('#dialogueText').addEventListener('click', showNextLine); 
+    snowballFightDialogue = true;
+
+    document.querySelector('#currentTaskPlace').innerHTML= 'Head over to christmas tree'    
+    document.querySelector('#tasksCompleted').innerHTML= '3 / 3'   
+    document.querySelector('#currentTaskName').innerHTML= 'Light up Tree'      
+ 
+}
+
 function showNextLine() {
     if (currentLineIndex === 0)
         document.querySelector('#quest').style.display = 'block';

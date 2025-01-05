@@ -96,7 +96,8 @@ document.querySelector('#throwSnowball').addEventListener('click', (e) =>{
                         opacity:0
                     })
                     battle.initiated = false
-                    snowballFight = true
+                    snowballFight = true;
+                    afterSnowballDialogue();
                     audio.Map.play()
                     gsap.to('#quest', {
                         opacity: 0.9
