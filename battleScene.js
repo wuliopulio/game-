@@ -26,7 +26,7 @@ const draggle = new Sprite({
     },
     animate:true,
     isEnemy: true,
-    name: 'boy',
+    name: 'bob',
     health:100
 })
 

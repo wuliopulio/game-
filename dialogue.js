@@ -148,6 +148,30 @@ function afterBakeDialogue() {
  
 }
 
+function beforeSnowballDialogue() { 
+    activeDialogue = true;
+    dialogueLines = [
+        { name: 'penguin 5', text: `Oh my god !! the village bully is here again!!`, imageSrc: './img/penguin.png' }, 
+        { name: `${userName}`, text: 'What\'s going on? Where\'s the star?', imageSrc: './img/playerImage.png' }, 
+        { name: 'penguin 5', text: `The bully took it... and he ran off to the plateau !!`, imageSrc: './img/penguin.png' },
+        { name: `${userName}`, text: 'What! That\'s so mean. What can I do?', imageSrc: './img/playerImage.png' }, 
+        { name: 'penguin 5', text: `Well, he says that he\'ll give it back if you win in a snowball fight against him`, imageSrc: './img/penguin.png' },
+        { name: 'penguin 5', text: `But I have wings so I can\'t throw snowballs! `, imageSrc: './img/penguin.png' },
+        { name: `${userName}`, text: 'No worries, I can throw snowballs. I got you!', imageSrc: './img/playerImage.png' }
+    ];
+    currentLineIndex = 0;  
+ 
+    showNextLine(); 
+
+    document.querySelector('#dialogueText').addEventListener('click', showNextLine); 
+    snowballFightDialogue = true;
+
+    document.querySelector('#currentTaskPlace').innerHTML= 'Head over to boy on platform'    
+    document.querySelector('#tasksCompleted').innerHTML= '2 / 3'   
+    document.querySelector('#currentTaskName').innerHTML= 'Put up star'      
+ 
+}
+
 function showNextLine() {
     if (currentLineIndex === 0)
         document.querySelector('#quest').style.display = 'block';

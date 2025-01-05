@@ -386,7 +386,7 @@ function animate() {
                     -Math.max(player.position.x, battleZone.position.x) )*
                 (Math.min(player.position.y + player.height, battleZone.position.y + battleZone.height
                 ) - Math.max(player.position.y, battleZone.position.y))
-            if (snowballFight === false &&
+            if (snowballFight === false && snowballFightDialogue ===true &&
                 rectangularCollision({
                     rectangle1: player,
                     rectangle2: battleZone  
