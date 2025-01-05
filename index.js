@@ -18,6 +18,7 @@ let yayPlayed = [false, false, false];
 let bakeDialogue = false;
 let doBakeCookies = false; 
 let afterBakeDialogueBool = false;
+let snowballFightDialogue = false;
  
 const offset = {
     x: -970,
@@ -222,6 +223,25 @@ bakeryFrontMap.forEach((row, i) =>{
     })
 })
 
+//snowball Dialogue 
+const snowballMap = [] 
+for(let i=0; i < snowballData.length; i+=70){
+    snowballMap.push(snowballData.slice(i,70 +i))
+}
+
+const snowballs = []
+snowballMap.forEach((row, i) =>{
+    row.forEach((symbol,j) => {
+        if (symbol === 5322){
+         snowballs.push(
+            new Boundary({
+                position:{
+                    x:j*Boundary.width + offset.x,
+                    y: i*Boundary.height + offset.y
+         }}))}
+    })
+})
+
 //Load images 
 const image = new Image()
 image.src = './img/map.png'
@@ -294,7 +314,7 @@ const keys ={
  
 //List of all movable objects in the scene
 const movables = [background, ...boundaries, foreground, ...battleZones, ...startPositions, ...presentPenguins, ...houseFronts 
-    , ...houseOnes, ...houseTwos, ...houseThrees, ...bakes, ...bakeryFronts
+    , ...houseOnes, ...houseTwos, ...houseThrees, ...bakes, ...bakeryFronts, ...snowballs
 ]
 
 //Collision detection between two rectangular objects 
@@ -342,6 +362,9 @@ function animate() {
     })
     bakeryFronts.forEach(bakeryFront => {
         bakeryFront.draw()
+    })
+    snowballs.forEach(snowball => {
+        snowball.draw()
     })
 
     player.draw()
@@ -606,7 +629,22 @@ function animate() {
         }
     }  
 
-    
+    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
+        for(let i =0; i<snowballs.length; i++){
+            const snowball = snowballs[i] 
+            if (snowballFightDialogue === false && afterBakeDialogueBool === true &&
+                rectangularCollision({
+                    rectangle1: player,
+                    rectangle2: snowball  
+                }) 
+            ){  
+                battle.initiated = true;
+                beforeSnowballDialogue();
+                break
+                
+            }
+        }
+    }  
 
     //movement logic
     if (keys.w.pressed && lastKey ==='w') {
