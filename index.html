@@ -32,6 +32,18 @@ button:hover {
 left: 50%; 
 transform: translate(-50%, -50%);"> 
   <!--fade to black -->
+  <div id ="endingScene"
+    style="
+    color:white; 
+    position:absolute; 
+    top:0; 
+    right:0; 
+    bottom:0; 
+    left:0; 
+    opacity:0;
+    pointer-events: none;
+    z-index:21;" ><h1 style="position:absolute;top: 100px; left: 400px; font-size: 60px;">You finished !! </h1> <p style="position:absolute;top: 200px; left:400px;">Thanks so much for playing my game :D</p>
+  </div>  
   <div id ="overlappingDiv"
     style="
     background-color:black; 
@@ -42,7 +54,7 @@ transform: translate(-50%, -50%);">
     left:0; 
     opacity:0; 
     pointer-events: none;
-    z-index:10;" >
+    z-index:20;" >
   </div>  
   
   <!--dialogue-->
@@ -195,6 +207,9 @@ transform: translate(-50%, -50%);">
     <div id="clockAnimation" style="display: none; opacity:0;width: 200px; height: 200px;
     pointer-events: none; position: absolute; top: 50%; left: 60%; transform: translate(-50%, -50%);"></div>
     
+    <!-- christmas tree --> 
+    <img id="christmasTreeGif" style="display:none; position: absolute; width: 1024px; height: 576px; pointer-events: none; z-index: 12;" src="img/map.gif"> 
+    <img id="christmasTreeEnd" style="display:none; position: absolute; width: 1024px; height: 576px; pointer-events: none; z-index: 13;" src="img/mapEnd.png"> 
        
   <canvas></canvas>
 
@@ -281,6 +296,7 @@ referrerpolicy="no-referrer"></script>
 <script src="audio.js"></script> 
 <script src="data/battleZonesData.js"></script>
 <script src="data/snowballData.js"></script>
+<script src="data/christmasTreeData.js"></script>
 <script src="data/presentPenguinData.js"></script>
 <script src = "data/houseOne.js"></script>
 <script src = "data/houseTwo.js"></script>

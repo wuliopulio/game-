@@ -19,6 +19,7 @@ let bakeDialogue = false;
 let doBakeCookies = false; 
 let afterBakeDialogueBool = false;
 let snowballFightDialogue = false;
+let christmasTreeBool = false;
  
 const offset = {
     x: -970,
@@ -242,6 +243,25 @@ snowballMap.forEach((row, i) =>{
     })
 })
 
+//christmas Tree 
+const christmasTreeMap = [] 
+for(let i=0; i < christmasTreeData.length; i+=70){
+    christmasTreeMap.push(christmasTreeData.slice(i,70 +i))
+}
+
+const christmasTrees = []
+christmasTreeMap.forEach((row, i) =>{
+    row.forEach((symbol,j) => {
+        if (symbol === 5322){
+         christmasTrees.push(
+            new Boundary({
+                position:{
+                    x:j*Boundary.width + offset.x,
+                    y: i*Boundary.height + offset.y
+         }}))}
+    })
+})
+
 //Load images 
 const image = new Image()
 image.src = './img/map.png'
@@ -314,7 +334,7 @@ const keys ={
  
 //List of all movable objects in the scene
 const movables = [background, ...boundaries, foreground, ...battleZones, ...startPositions, ...presentPenguins, ...houseFronts 
-    , ...houseOnes, ...houseTwos, ...houseThrees, ...bakes, ...bakeryFronts, ...snowballs
+    , ...houseOnes, ...houseTwos, ...houseThrees, ...bakes, ...bakeryFronts, ...snowballs, ...christmasTrees
 ]
 
 //Collision detection between two rectangular objects 
@@ -365,6 +385,9 @@ function animate() {
     })
     snowballs.forEach(snowball => {
         snowball.draw()
+    })
+    christmasTrees.forEach(christmasTree => {
+        christmasTree.draw()
     })
 
     player.draw()
@@ -646,6 +669,23 @@ function animate() {
         }
     }  
 
+    //christmas tree we are ALMOST THERE
+    
+    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
+        for(let i =0; i<christmasTrees.length; i++){
+            const christmasTree = christmasTrees[i] 
+            if (snowballFightDialogue === true  &&
+                rectangularCollision({
+                    rectangle1: player,
+                    rectangle2: christmasTree  
+                }) 
+            ){  
+                displayEnding()
+                
+            }
+        }
+    }  
+
     //movement logic
     if (keys.w.pressed && lastKey ==='w') {
         player.animate = true
@@ -792,3 +832,39 @@ addEventListener('click', () =>{
     clicked = true
     }
 })
+
+function displayEnding(){
+    battle.initiated = true; 
+    gsap.to('#overlappingDiv', {
+        opacity:1,
+        duration:0.4,
+        onComplete() {
+            gsap.to('#overlappingDiv', {
+                opacity:1,
+                duration:0.4,
+                onComplete() { 
+                    document.getElementById('christmasTreeGif').style.display ='block';
+                    gsap.to('#overlappingDiv', {
+                        opacity:0,
+                        duration:0.4
+                    })
+                    setTimeout(()=>{
+                        document.getElementById('christmasTreeEnd').style.display = 'block';
+                    }, 3500)  
+                        gsap.to('#overlappingDiv', {
+                            opacity:1,
+                            duration: 1,
+                            delay: 5,
+                            onComplete(){
+                                gsap.to('#endingScene', {
+                                    opacity:1,
+                                    duration: 1
+                                }) 
+                            }
+                        }) 
+                }
+            })
+            
+        }
+    })
+}
