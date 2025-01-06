@@ -5,16 +5,16 @@ let activeDialogue = false;
 function startDialogueText() { 
     activeDialogue = true;
     dialogueLines = [
-        { name: 'penguin 1', text: 'Oh gosh, hello! It\'s been so long since we\'ve had a visitor!', imageSrc: './img/penguin.png' },
-        { name: 'penguin 1', text: 'Welcome, welcome! How are you? What\'s your name?', imageSrc: './img/penguin.png' },
-        { name: 'penguin 1', text: `Oh, ${userName}? What a pretty name! `, imageSrc: './img/penguin.png' }  ,
-        { name: 'penguin 1', text: `Say, Christmas is in a couple days and we could use some help around the village. Do you mind? `, imageSrc: './img/penguin.png' }  ,
+        { name: 'penguin 1', text: 'Oh gosh, hello! It\'s been so long since we\'ve had a visitor!', imageSrc: './sprites/excitedBoth.png' },
+        { name: 'penguin 1', text: 'Welcome, welcome! How are you? What\'s your name?', imageSrc: './sprites/neutralBoth.png' },
+        { name: 'penguin 1', text: `Oh, ${userName}? What a pretty name! `, imageSrc: './sprites/happyBoth.png' }  ,
+        { name: 'penguin 1', text: `Say, Christmas is in a couple days and we could use some help around the village. Do you mind? `, imageSrc: './sprites/neutralBoth.png' }  ,
         { name: `${userName}`, text: `Of course not! What do I have to do?  `, imageSrc: './img/playerImage.png' }    ,
-        { name: 'penguin 1', text: `We\'re almost done with the preparations, so there shouldn't be too much left.`, imageSrc: './img/penguin.png' }  ,
-        { name: 'penguin 1', text: 'It should just be wrapping presents, baking cookies, and putting the star up!', imageSrc: './img/penguin.png' }  ,
-        { name: 'penguin 1', text: 'After that, we can light up the christmas tree! You think you got that?', imageSrc: './img/penguin.png' },
+        { name: 'penguin 1', text: `We\'re almost done with the preparations, so there shouldn't be too much left.`, imageSrc: './sprites/neutralBoth.png' }  ,
+        { name: 'penguin 1', text: 'It should just be wrapping presents, baking cookies, and putting the star up!', imageSrc: './sprites/neutralBoth.png' }  ,
+        { name: 'penguin 1', text: 'After that, we can light up the christmas tree! You think you got that?', imageSrc: './sprites/neutralBoth.png' },
         { name: `${userName}`, text: 'Omg yes, I got this. First up, I\'ll wrap the presents!', imageSrc: './img/playerImage.png' } ,
-        { name: `penguin 1`, text: 'Oh, if you want to wrap presents first, head over to penguin 2. He\'s right up ahead!', imageSrc: './img/penguin.png' } 
+        { name: `penguin 1`, text: 'Oh, if you want to wrap presents first, head over to penguin 2. He\'s right up ahead!', imageSrc: './sprites/happyBoth.png' } 
 
     ];
     currentLineIndex = 0;  
@@ -28,13 +28,13 @@ function startDialogueText() {
 function presentDialogueText() { 
     activeDialogue = true;
     dialogueLines = [
-        { name: 'penguin 2', text: `Hello ${userName}! Penguin 1 told me about you! You\'re here to help, right?`, imageSrc: './img/penguin.png' },
+        { name: 'penguin 2', text: `Hello ${userName}! Penguin 1 told me about you! You\'re here to help, right?`, imageSrc: './sprites/happyScarf.png' },
         { name: `${userName}`, text: 'Ah, yes! You need help wrapping presents, right?', imageSrc: './img/playerImage.png' },
-        { name: 'penguin 2', text: `That's right. But after wrapping them, we also need to deliver them.`, imageSrc: './img/penguin.png' } ,
+        { name: 'penguin 2', text: `That's right. But after wrapping them, we also need to deliver them.`, imageSrc: './sprites/neutralBoth.png' } ,
         { name: `${userName}`, text: `Oh, to who? I thought we would place them under the tree.`, imageSrc: './img/playerImage.png' }  ,
-        { name: 'penguin 2', text: `It's to the villagers! Some have a hard time wrapping them with their wings, so we help them out.`, imageSrc: './img/penguin.png' },
+        { name: 'penguin 2', text: `It's to the villagers! Some have a hard time wrapping them with their wings, so we help them out.`, imageSrc: './sprites/excitedScarf.png' },
         { name: `${userName}`, text: `Aww, that's so sweet. How can I help? `, imageSrc: './img/playerImage.png' },
-        { name: 'penguin 2', text: `Head over to the house with the red flower and blue bush in front. That's where we'll start.`, imageSrc: './img/penguin.png' }
+        { name: 'penguin 2', text: `Head over to the house with the red flower and blue bush in front. That's where we'll start.`, imageSrc: './sprites/neutralBoth.png' }
     ];
     currentLineIndex = 0;  
  
@@ -49,9 +49,9 @@ function presentDialogueText() {
 function livingRoomDialogue() { 
     activeDialogue = true;
     dialogueLines = [
-        { name: 'penguin 3', text: `${userName}! Thanks so much for coming. `, imageSrc: './img/penguin.png' },
-        { name: 'penguin 3', text: `We'll start right away. You ready? `, imageSrc: './img/penguin.png' },
-        { name: 'penguin 3', text: `There are 3 fish on the ground. Click on them to wrap them up! `, imageSrc: './img/penguin.png' }
+        { name: 'penguin 3', text: `${userName}! Thanks so much for coming. `, imageSrc: './sprites/excited.png' },
+        { name: 'penguin 3', text: `We'll start right away. You ready? `, imageSrc: './sprites/neutral.png' },
+        { name: 'penguin 3', text: `There are 3 fish on the ground. Click on them to wrap them up! `, imageSrc: './sprites/happy.png' }
     ];
     currentLineIndex = 0;  
  
@@ -67,9 +67,9 @@ function livingRoomDialogue() {
 function livingRoomAfterDialogue() { 
     activeDialogue = true;
     dialogueLines = [
-        { name: 'penguin 3', text: `${userName}! Wow you're so quick! `, imageSrc: './img/penguin.png' },
-        { name: 'penguin 3', text: `After this, we just need to deliver them to their owners. It should be the three houses closest to us`, imageSrc: './img/penguin.png' },
-        { name: 'penguin 3', text: `Thank you so much!`, imageSrc: './img/penguin.png' }
+        { name: 'penguin 3', text: `${userName}! Wow you're so quick! `, imageSrc: './sprites/shock.png' },
+        { name: 'penguin 3', text: `After this, we just need to deliver them to their owners. It should be the three houses closest to us`, imageSrc: './sprites/neutral.png' },
+        { name: 'penguin 3', text: `Thank you so much!`, imageSrc: './sprites/happy.png' }
     ];
     currentLineIndex = 0;  
  
@@ -84,10 +84,10 @@ function livingRoomAfterDialogue() {
 function deliverGiftAfterDialogue() { 
     activeDialogue = true;
     dialogueLines = [
-        { name: 'penguin 3', text: `That's all the gifts, then! Again, thanks so much! `, imageSrc: './img/penguin.png' },
+        { name: 'penguin 3', text: `That's all the gifts, then! Again, thanks so much! `, imageSrc: './sprites/happy.png' },
         { name: `${userName}`, text: 'Of course! You\'re welcome. ', imageSrc: './img/playerImage.png' },
         { name: `${userName}`, text: 'Next, I\'ll go bake some cookies. Where would that be?', imageSrc: './img/playerImage.png' },
-        { name: 'penguin 3', text: `Cookies! That\'ll be at the bakery, which is on the East side of the map. It's hard to miss.`, imageSrc: './img/penguin.png' },
+        { name: 'penguin 3', text: `Cookies! That\'ll be at the bakery, which is on the East side of the map. It's hard to miss.`, imageSrc: './sprites/happy.png' },
         { name: `${userName}`, text: 'I see! I\'ll go there next then. Thank you!', imageSrc: './img/playerImage.png' }
     ];
     currentLineIndex = 0;  
@@ -107,10 +107,10 @@ function deliverGiftAfterDialogue() {
 function doBakeDialogue() { 
     activeDialogue = true;
     dialogueLines = [
-        { name: 'penguin 4', text: `Oh my gosh! thanks for coming!`, imageSrc: './img/penguin.png' },
-        { name: 'penguin 4', text: `You came just in time, I just broke my wing so I can't bake cookies!`, imageSrc: './img/penguin.png' },
+        { name: 'penguin 4', text: `Oh my gosh! thanks for coming!`, imageSrc: './sprites/excitedHat.png' },
+        { name: 'penguin 4', text: `You came just in time, I just broke my wing so I can't bake cookies!`, imageSrc: './sprites/embarassedHat.png' },
         { name: `${userName}`, text: 'Oh no!! Don\'t worry, I can help with cookies.', imageSrc: './img/playerImage.png' }, 
-        { name: 'penguin 4', text: `Thank you so much ;_; the bakery is right there! I have the recipe set up and everything.`, imageSrc: './img/penguin.png' },
+        { name: 'penguin 4', text: `Thank you so much ;_; the bakery is right there! I have the recipe set up and everything.`, imageSrc: './sprites/excitedHat.png' },
         { name: `${userName}`, text: 'No problem! It\'ll be done in no time.', imageSrc: './img/playerImage.png' }
     ];
     currentLineIndex = 0;  
@@ -130,9 +130,9 @@ function doBakeDialogue() {
 function afterBakeDialogue() { 
     activeDialogue = true;
     dialogueLines = [
-        { name: 'penguin 4', text: `Thanks so much for covering for me. What do you need to do next?`, imageSrc: './img/penguin.png' }, 
+        { name: 'penguin 4', text: `Thanks so much for covering for me. What do you need to do next?`, imageSrc: './sprites/embarassedHat.png' }, 
         { name: `${userName}`, text: 'I think the last thing I\'ll help with will be putting up the star', imageSrc: './img/playerImage.png' }, 
-        { name: 'penguin 4', text: `Oh the star! Penguin 5 to the right should have it. Thanks so much again and good luck!`, imageSrc: './img/penguin.png' },
+        { name: 'penguin 4', text: `Oh the star! Penguin 5 to the right should have it. Thanks so much again and good luck!`, imageSrc: './sprites/excitedHat.png' },
         { name: `${userName}`, text: 'No problem! ', imageSrc: './img/playerImage.png' }
     ];
     currentLineIndex = 0;  
@@ -151,12 +151,12 @@ function afterBakeDialogue() {
 function beforeSnowballDialogue() { 
     activeDialogue = true;
     dialogueLines = [
-        { name: 'penguin 5', text: `Oh my god !! the village bully is here again!!`, imageSrc: './img/penguin.png' }, 
+        { name: 'penguin 5', text: `Oh my god !! the village bully is here again!!`, imageSrc: './sprites/shock.png' }, 
         { name: `${userName}`, text: 'What\'s going on? Where\'s the star?', imageSrc: './img/playerImage.png' }, 
-        { name: 'penguin 5', text: `The bully took it... and he ran off to the plateau !!`, imageSrc: './img/penguin.png' },
+        { name: 'penguin 5', text: `The bully took it... and he ran off to the plateau !!`, imageSrc: './sprites/sad.png' },
         { name: `${userName}`, text: 'What! That\'s so mean. What can I do?', imageSrc: './img/playerImage.png' }, 
-        { name: 'penguin 5', text: `Well, he says that he\'ll give it back if you win in a snowball fight against him`, imageSrc: './img/penguin.png' },
-        { name: 'penguin 5', text: `But I have wings so I can\'t throw snowballs! `, imageSrc: './img/penguin.png' },
+        { name: 'penguin 5', text: `Well, he says that he\'ll give it back if you win in a snowball fight against him`, imageSrc: './sprites/neutral.png' },
+        { name: 'penguin 5', text: `But I have wings so I can\'t throw snowballs! `, imageSrc: './sprites/sad.png' },
         { name: `${userName}`, text: 'No worries, I can throw snowballs. I got you!', imageSrc: './img/playerImage.png' }
     ];
     currentLineIndex = 0;  
@@ -175,11 +175,11 @@ function beforeSnowballDialogue() {
 function afterSnowballDialogue() { 
     activeDialogue = true;
     dialogueLines = [
-        { name: 'penguin 5', text: `Ohh!! ${userName}, thank you so much!`, imageSrc: './img/penguin.png' }, 
+        { name: 'penguin 5', text: `Ohh!! ${userName}, thank you so much!`, imageSrc: './sprites/excited.png' }, 
         { name: `${userName}`, text: 'Oh my gosh of course! I\'m so happy I could help', imageSrc: './img/playerImage.png' }, 
-        { name: 'penguin 5', text: `Yes.. you\'ve been a huge help. Would you like to watch us light up the christmas tree?`, imageSrc: './img/penguin.png' },
+        { name: 'penguin 5', text: `Yes.. you\'ve been a huge help. Would you like to watch us light up the christmas tree?`, imageSrc: './sprites/happy.png' },
         { name: `${userName}`, text: 'I\'d love to!', imageSrc: './img/playerImage.png' }, 
-        { name: 'penguin 5', text: `Let's head over to the christmas tree then!`, imageSrc: './img/penguin.png' } 
+        { name: 'penguin 5', text: `Let's head over to the christmas tree then!`, imageSrc: './sprites/excited.png' } 
     ];
     currentLineIndex = 0;  
  
