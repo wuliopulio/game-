@@ -24,12 +24,12 @@ const audio = {
     victory: new Howl({
         src: './audio/victory.wav',
         html5:true,
-        volume:1
+        volume:0.7
     }),
     livingRoom: new Howl ({
         src: './audio/livingRoom.wav',
         html5: true,
-        volume: 0.3,
+        volume: 0.2,
         loop:true,
     }),
     yay: new Howl({
