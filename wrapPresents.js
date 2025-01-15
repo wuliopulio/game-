@@ -27,6 +27,8 @@ function checkFishCount() {
         
         audio.livingRoom.stop()
         audio.victory.play()
+        
+        presentWrap = true
         gsap.to('#overlappingDiv', {
             delay:1.5,
             opacity:1,
@@ -35,7 +37,6 @@ function checkFishCount() {
                 gsap.to('#overlappingDiv',{
                     opacity:0
                 }) 
-                presentWrap = true
                 setTimeout(() => {
                     audio.Map.play();
                     battle.initiated = false;
