@@ -31,7 +31,7 @@ function presentDialogueText() {
         { name: 'penguin 2', text: `Hello ${userName}! Penguin 1 told me about you! You\'re here to help, right?`, imageSrc: './sprites/happyScarf.png' },
         { name: `${userName}`, text: 'Ah, yes! You need help wrapping presents, right?', imageSrc: './img/playerImage.png' },
         { name: 'penguin 2', text: `That's right. But after wrapping them, we also need to deliver them.`, imageSrc: './sprites/neutralBoth.png' } ,
-        { name: `${userName}`, text: `Oh, to who? I thought we would place them under the tree.`, imageSrc: './img/playerImage.png' }  ,
+        { name: `${userName}`, text: `Oh, to whom? I thought we would place them under the tree.`, imageSrc: './img/playerImage.png' }  ,
         { name: 'penguin 2', text: `It's to the villagers! Some have a hard time wrapping them with their wings, so we help them out.`, imageSrc: './sprites/excitedScarf.png' },
         { name: `${userName}`, text: `Aww, that's so sweet. How can I help? `, imageSrc: './img/playerImage.png' },
         { name: 'penguin 2', text: `Head over to the house with the red flower and blue bush in front. That's where we'll start.`, imageSrc: './sprites/neutralBoth.png' }
